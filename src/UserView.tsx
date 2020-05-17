@@ -1,5 +1,6 @@
 import React from "react";
 import { User } from "./api";
+import { Link } from "react-router-dom";
 
 export const UserView: React.FC<{ user: User }> = (props) => {
   return (

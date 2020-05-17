@@ -35,6 +35,36 @@ function renderHLJSNode(node: HLJSNode, i: number) {
   );
 }
 
+function RemixOf ( dweet: Dweet | null ) {
+    if(!dweet){
+        return;
+    }
+    return (
+        <div className="mb-3" style={{
+          float:"right"
+        }}>
+          {'Remix of '}
+          <Link to={"/d/" + dweet.id}>
+            <span style={{
+                opacity:"0.5"
+              }}>
+                d/
+            </span>
+            {dweet.id}
+          </Link>
+          {' by '}
+          <Link to={"/u/" + dweet.author.username}>
+            <span style={{ fontWeight: "bold" }}>
+              <span style={{ opacity: "0.5",}}>
+                u/
+              </span>
+              {dweet.author.username}
+            </span>
+          </Link>
+        </div>
+    );
+}
+
 export const DweetCard: React.FC<Props> = (props) => {
   const [iframeContainer, setIframeContainer] = useState<HTMLDivElement | null>(
     null
@@ -255,8 +285,16 @@ export const DweetCard: React.FC<Props> = (props) => {
           Fullscreen
         </a>
       </div>
-      <div className="mb-3">
-        <UserView user={dweet.author} />
+      <div style={{
+        display:"inline-block",
+          width: "100%",
+      }}>
+        <div className="mb-3" style={{
+          float:"left"
+        }}>
+          <UserView user={dweet.author} />
+        </div>
+        { RemixOf(dweet.remix_of) }
       </div>
       <div
         style={{
